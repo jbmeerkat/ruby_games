@@ -16,11 +16,9 @@ RSpec.describe Pong::MainWindow do
       close!
     end
   end
-  after { window.close! }
 
   it 'works' do
     expect(window).to be
     expect(window).to have_attributes(expected_attributes)
-    expect { window.show }.not_to raise_error
   end
 end
