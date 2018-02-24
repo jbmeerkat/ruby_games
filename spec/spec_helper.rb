@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+require 'rubygems'
+require 'bundler/setup'
+Bundler.require(:default, :test)
+
+require 'aasm/rspec'
+
 require 'simplecov'
 SimpleCov.start
 
