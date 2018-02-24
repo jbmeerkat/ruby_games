@@ -17,8 +17,9 @@ RSpec.describe Pong::MainWindow do
     end
   end
 
-  it 'works' do
+  it 'works', gosu: true do
     expect(window).to be
     expect(window).to have_attributes(expected_attributes)
+    expect { window.show }.not_to raise_error
   end
 end
