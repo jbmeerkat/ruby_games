@@ -7,7 +7,7 @@ RSpec.describe Pong do
     allow_any_instance_of(Pong::Game).to receive(:config) do
       OpenStruct.new(described_class::DEFAULT_CONFIG)
     end
-    allow_any_instance_of(Pong::MainWindow).to receive(:show)
+    allow_any_instance_of(Pong::MainWindow).to receive(:show) { true }
   end
 
   it 'has version' do
