@@ -1,4 +1,7 @@
 language: ruby
+before_install:
+  # Gosu dependencies
+  - sudo apt-get install build-essential libsdl2-dev libsdl2-ttf-dev libpango1.0-dev libgl1-mesa-dev libopenal-dev libsndfile-dev libmpg123-dev libgmp-dev
 install:
   - make install
 script: make build
