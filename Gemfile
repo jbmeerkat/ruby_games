@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 ruby '~> 2.5.0'
 
+gem 'aasm'
 gem 'gosu'
 
 group :development do
@@ -12,4 +13,8 @@ end
 group :test do
   gem 'rspec'
   gem 'simplecov', require: false
+end
+
+group :development, :test do
+  gem 'pry-byebug'
 end
