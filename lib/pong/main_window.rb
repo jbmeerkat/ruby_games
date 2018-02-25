@@ -18,11 +18,15 @@ module Pong
     end
 
     def update
-      # game.update
+      game.update
     end
 
     def draw
-      # game.draw
+      game.draw
+    end
+
+    def button_down(id)
+      game.button_pressed(id)
     end
   end
 end

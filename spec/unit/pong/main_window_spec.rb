@@ -4,7 +4,7 @@ RSpec.describe Pong::MainWindow do
   let(:config) do
     double(window_height: 100, window_width: 100, window_caption: 'Foo')
   end
-  let(:game) { double('Pong::Game', config: config) }
+  let(:game) { double('Pong::Game', config: config, update: true, draw: true) }
   let(:expected_attributes) do
     { width: 100, height: 100, caption: 'Foo' }
   end
