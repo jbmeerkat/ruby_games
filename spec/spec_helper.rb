@@ -7,7 +7,9 @@ Bundler.require(:default, :test)
 require 'aasm/rspec'
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter 'spec/'
+end
 
 require 'pong'
 
