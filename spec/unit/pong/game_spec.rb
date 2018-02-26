@@ -3,7 +3,7 @@
 RSpec.describe Pong::Game do
   let(:test_logger) do
     log_path = Pong.root.join('log', 'test.log')
-    Logger.new(log_path)
+    Logger.new(log_path, progname: 'pong_test')
   end
   let(:config) do
     messages = {

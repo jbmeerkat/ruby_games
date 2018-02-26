@@ -7,7 +7,7 @@ require_relative 'pong/game'
 # Pong game's root module
 module Pong
   DEFAULT_CONFIG = {
-    logger: Logger.new(STDOUT),
+    logger: Logger.new(STDOUT, progname: 'pong'),
     window_width: 1024,
     window_height: 768,
     window_caption: 'Pong'
