@@ -2,7 +2,7 @@
 
 module Pong
   # Main (and the only) game window
-  class MainWindow < Gosu::Window
+  class GameWindow < Gosu::Window
     attr_reader :config, :game
 
     def initialize(game:)

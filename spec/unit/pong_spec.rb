@@ -3,13 +3,13 @@
 require 'ostruct'
 
 RSpec.describe Pong do
-  let(:window) { double('Pong::MainWindow') }
+  let(:window) { double('Pong::MenuWindow') }
 
   before do
     allow_any_instance_of(Pong::Game).to receive(:config) do
       OpenStruct.new(described_class::DEFAULT_CONFIG)
     end
-    allow(Pong::MainWindow).to receive(:new) { window }
+    allow(Pong::MenuWindow).to receive(:new) { window }
     allow(window).to receive(:show) { true }
   end
 

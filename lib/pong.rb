@@ -2,7 +2,6 @@
 
 require_relative 'pong/version'
 require_relative 'pong/config'
-require_relative 'pong/main_window'
 require_relative 'pong/game'
 
 # Pong game's root module
@@ -19,8 +18,14 @@ module Pong
   def start(config: DEFAULT_CONFIG)
     config = Config.new(config)
     game = Game.new(config: config)
-    game_window = MainWindow.new(game: game)
 
-    game_window.show
+    game.start
+  end
+
+  def root
+    Pathname.new(File.expand_path('../..', __FILE__))
   end
 end
+
+require_relative 'pong/menu_window'
+require_relative 'pong/game_window'

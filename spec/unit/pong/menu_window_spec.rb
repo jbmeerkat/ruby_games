@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Pong::MainWindow do
+RSpec.describe Pong::MenuWindow do
   let(:config) do
     double(window_height: 100, window_width: 100, window_caption: 'Foo')
   end
