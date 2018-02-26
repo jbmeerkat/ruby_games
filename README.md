@@ -1,5 +1,6 @@
 # Pong game
 [![Build Status](https://travis-ci.org/jbmeerkat/pong.svg?branch=master)](https://travis-ci.org/jbmeerkat/pong)
+[![Dependency Status](https://beta.gemnasium.com/badges/github.com/jbmeerkat/pong.svg)](https://beta.gemnasium.com/projects/github.com/jbmeerkat/pong)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ffbbfd5be6a58ddda818/maintainability)](https://codeclimate.com/github/jbmeerkat/pong/maintainability)
 [![codebeat](https://codebeat.co/badges/4f0e40e7-734c-4c3e-b9a3-8344d1f2ce6a)](https://codebeat.co/projects/github-com-jbmeerkat-pong-master)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ffbbfd5be6a58ddda818/test_coverage)](https://codeclimate.com/github/jbmeerkat/pong/test_coverage)
