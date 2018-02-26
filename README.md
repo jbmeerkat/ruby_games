@@ -5,6 +5,8 @@
 
 Simple implementation of [pong game](https://en.wikipedia.org/wiki/Pong)
 
+![Menu](https://i.imgur.com/xYqXY8S.png)
+
 ## Installation
 
 Clone repo and run
