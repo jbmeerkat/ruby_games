@@ -2,14 +2,13 @@
 
 require_relative 'pong/version'
 require_relative 'pong/config'
-require_relative 'pong/ingame_logger'
 require_relative 'pong/main_window'
 require_relative 'pong/game'
 
 # Pong game's root module
 module Pong
   DEFAULT_CONFIG = {
-    logger: IngameLogger.new,
+    logger: Logger.new(STDOUT),
     window_width: 1024,
     window_height: 768,
     window_caption: 'Pong'

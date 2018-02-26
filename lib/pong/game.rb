@@ -37,26 +37,11 @@ module Pong
     end
 
     def draw
-      draw_logs
+      # do nothing
     end
 
     def button_pressed(id)
       logger.debug "#{id} was pressed"
-    end
-
-    def draw_logs
-      y_position = config.window_height - (@font.height * 10)
-
-      logger.messages.last(10).each_with_index do |message, index|
-        line_y_position = y_position + (@font.height * index)
-        draw_log_message(message.strip, 10, line_y_position)
-      end
-    end
-
-    private
-
-    def draw_log_message(message, x, y)
-      @font.draw(message.strip, x, y, 1, 1.0, 1.0, Gosu::Color::YELLOW)
     end
   end
 end
