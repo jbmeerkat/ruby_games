@@ -17,6 +17,11 @@ RSpec.describe Pong::Game do
 
   subject(:game) { described_class.new(config: config) }
 
+  before do
+    allow(Pong::MenuWindow).to receive(:new) { double }
+    allow(Pong::GameWindow).to receive(:new) { double }
+  end
+
   describe 'initial state' do
     it { expect(game).to have_state :inactive }
   end
