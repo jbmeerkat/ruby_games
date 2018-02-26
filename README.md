@@ -7,7 +7,7 @@ Simple implementation of [pong game](https://en.wikipedia.org/wiki/Pong)
 
 ## Installation
 
-Clone repo
+Clone repo and run
 
 `$ make install`
 
