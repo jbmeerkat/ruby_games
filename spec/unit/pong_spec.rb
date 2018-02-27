@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pong_helper'
+
 require 'ostruct'
 
 RSpec.describe Pong do

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pong_helper'
+
 RSpec.describe Pong::Game do
   let(:test_logger) do
     log_path = Pong.root.join('log', 'test.log')

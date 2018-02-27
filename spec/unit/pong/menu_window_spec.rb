@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pong_helper'
+
 RSpec.describe Pong::MenuWindow do
   let(:config) do
     double(window_height: 100, window_width: 100, window_caption: 'Foo')

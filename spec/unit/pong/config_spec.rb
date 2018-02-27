@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pong_helper'
+
 RSpec.describe Pong::Config do
   subject(:result) { described_class.new(params) }
 
