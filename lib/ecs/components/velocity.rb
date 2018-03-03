@@ -3,7 +3,7 @@
 module ECS
   module Components
     # Velocity component
-    class Velocity < ECS::Component
+    class Velocity < ECS::Components::Base
       attribute :x, Types::Int.default(0)
       attribute :y, Types::Int.default(0)
       attribute :max, Types::Int.optional.default(nil)
