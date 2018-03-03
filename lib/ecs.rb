@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'ecs/entity'
+require_relative 'ecs/entity_registry'
 require_relative 'ecs/components'
 
 # Entity-component-system framework
