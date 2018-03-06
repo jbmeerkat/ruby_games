@@ -25,7 +25,7 @@ RSpec.describe ECS::EntityRegistry do
 
   describe '#add_component' do
     let(:entity) { rand(100) }
-    let(:component) { double('ECS::Components::Base') }
+    let(:component) { double('ECS::Components::Base', name: :foo) }
 
     subject(:add_component) { registry.add_component(entity, component) }
     subject(:entity_components) { registry.entity_components }
@@ -37,11 +37,59 @@ RSpec.describe ECS::EntityRegistry do
       }.to change {
         entity_components[entity].count
       }.by(1).and change {
-        component_entities[component].count
+        component_entities[:foo].count
       }.by(1)
 
       expect(entity_components[entity]).to include component
-      expect(component_entities[component]).to include entity
+      expect(component_entities[:foo]).to include entity
+    end
+  end
+
+  describe '#entities_by_components' do
+    def create_component(name)
+      double('ECS::Components::Base', name: name)
+    end
+
+    let(:entity1) { 1 }
+    let(:entity2) { 2 }
+    let(:foo_component) { create_component(:foo) }
+    let(:bar_component) { create_component(:bar) }
+    let(:baz_component) { create_component(:baz) }
+    let(:expected_entities) { [entity1, entity2] }
+
+    subject(:entities) do
+      registry.entities_by_components(foo_component.name, bar_component.name)
+    end
+
+    before do
+      registry.add_component(entity1, foo_component)
+      registry.add_component(entity1, bar_component)
+      registry.add_component(entity2, foo_component)
+      registry.add_component(entity2, bar_component)
+
+      # control group
+      registry.add_component(111, foo_component)
+      registry.add_component(1, baz_component)
+    end
+
+    it 'returns proper entities' do
+      expect(entities).to contain_exactly(*expected_entities)
+    end
+  end
+
+  describe '#entity_component' do
+    let(:entity) { 1 }
+    let(:component) { double('ECS::Components::Base', name: :foo) }
+    let(:expected_component) { component }
+
+    subject(:entity_component) do
+      registry.entity_component(entity, component.name)
+    end
+
+    before { registry.add_component(entity, component) }
+
+    it 'returns entity component' do
+      expect(entity_component).to eq expected_component
     end
   end
 end

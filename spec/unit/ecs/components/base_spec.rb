@@ -7,4 +7,8 @@ RSpec.describe ECS::Components::Base do
     it { is_expected.to be }
     it { is_expected.to have_attributes id: a_value }
   end
+
+  describe '#name' do
+    it { is_expected.to have_attributes name: :base }
+  end
 end

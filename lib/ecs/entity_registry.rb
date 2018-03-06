@@ -23,9 +23,21 @@ module ECS
 
     def add_component(entity, component)
       entity_components[entity] << component
-      component_entities[component] << entity
+      component_entities[component.name] << entity
 
       component
+    end
+
+    def entities_by_components(*component_names)
+      component_names.map do |component_name|
+        component_entities[component_name]
+      end.inject(:&)
+    end
+
+    def entity_component(entity, component_name)
+      entity_components[entity].detect do |component|
+        component.name == component_name
+      end
     end
   end
 end

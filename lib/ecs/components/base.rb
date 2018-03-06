@@ -16,6 +16,10 @@ module ECS
       constructor_type :strict_with_defaults
 
       attribute :id, Types::Id
+
+      def name
+        self.class.name.split('::').last.downcase.to_sym
+      end
     end
   end
 end
