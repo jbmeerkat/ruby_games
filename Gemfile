@@ -9,6 +9,7 @@ gem 'gosu'
 
 group :development do
   gem 'rubocop'
+  gem 'yard'
 end
 
 group :test do
