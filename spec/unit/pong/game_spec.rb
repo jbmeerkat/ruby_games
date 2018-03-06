@@ -3,6 +3,8 @@
 require 'pong_helper'
 
 RSpec.describe Pong::Game do
+  subject(:game) { described_class.new(config: config) }
+
   let(:test_logger) do
     log_path = Pong.root.join('log', 'test.log')
     Logger.new(log_path, progname: 'pong_test')
@@ -17,15 +19,9 @@ RSpec.describe Pong::Game do
     double('Pong::Config', messages)
   end
 
-  subject(:game) { described_class.new(config: config) }
-
   before do
     allow(Pong::MenuWindow).to receive(:new) { double }
     allow(Pong::GameWindow).to receive(:new) { double }
-  end
-
-  describe 'initial state' do
-    it { expect(game).to have_state :inactive }
   end
 
   describe 'play game' do
@@ -33,6 +29,9 @@ RSpec.describe Pong::Game do
       allow(game).to receive(:show_menu) { nil }
     end
 
-    it { expect(game).to transition_from(:inactive).to(:menu).on_event(:start) }
+    it do
+      expect(game).to have_state :inactive
+      expect(game).to transition_from(:inactive).to(:menu).on_event(:start)
+    end
   end
 end
