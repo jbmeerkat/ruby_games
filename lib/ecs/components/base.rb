@@ -5,7 +5,7 @@ require 'securerandom'
 module ECS
   module Components
     # Basic component
-    class Base < Dry::Struct
+    class Base < Dry::Struct::Mutable
       # Basic component types
       module Types
         include Dry::Types.module
