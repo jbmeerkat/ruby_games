@@ -13,7 +13,7 @@ RSpec.describe ECS::Systems::Movement do
   end
   let(:system) { described_class.new(entities_registry: registry) }
 
-  subject(:tick) { system.run(time_delta: 1) }
+  subject(:tick) { system.run(time_delta: 1000) }
   subject(:position) { registry.entity_component(entity, :position) }
 
   before do

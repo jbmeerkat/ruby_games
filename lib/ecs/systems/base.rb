@@ -7,10 +7,11 @@ module ECS
     # System must implement method +run+ that accepts +time_delta+ keyword
     # argument
     #
+    # @see ECS::Systems::Movement#process_tick Movement system implementation
     # @example
     #   class Movement < ECS::Systems::Base
     #     def process_tick(time_delta:)
-    #       entities_with(:velocity, :position) do |_entity, (velocity, position)|
+    #       entities_with(:velocity, :position) do |_, (velocity, position)|
     #         position.x = velocity.x * time_delta
     #         position.y = velocity.y * time_delta
     #       end
