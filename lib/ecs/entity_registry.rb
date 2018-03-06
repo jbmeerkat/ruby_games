@@ -28,7 +28,7 @@ module ECS
       component
     end
 
-    def entities_by_components(*component_names)
+    def entities_with_components(*component_names)
       component_names.map do |component_name|
         component_entities[component_name]
       end.inject(:&)
