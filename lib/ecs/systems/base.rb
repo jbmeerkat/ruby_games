@@ -10,10 +10,7 @@ module ECS
     # @example
     #   class Movement < ECS::Systems::Base
     #     def process_tick(time_delta:)
-    #       entities_with(:velocity, :position) do |entity|
-    #         velocity = registry.entity_component(entity, :velocity)
-    #         position = registry.entity_component(entity, :position)
-    #
+    #       entities_with(:velocity, :position) do |_entity, (velocity, position)|
     #         position.x = velocity.x * time_delta
     #         position.y = velocity.y * time_delta
     #       end
@@ -42,12 +39,14 @@ module ECS
       # @param [Array<String>] component_names Component names to
       #   filter entites by
       #
-      # @yield [ECS::Entity]
+      # @yield [ECS::Entity, Array<ECS::Components::Base>] Yields entity and
+      #   array of components in specified order
       def entities_with(*component_names)
         return to_enum(:entities_with) unless block_given?
 
         registry.entities_with_components(*component_names).each do |entity|
-          yield entity
+          components = component_names.map { |name| component(entity, name) }
+          yield entity, components
         end
       end
 
