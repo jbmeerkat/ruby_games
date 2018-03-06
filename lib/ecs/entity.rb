@@ -3,10 +3,11 @@
 require 'securerandom'
 
 module ECS
-  # Entities factory
-  class Entity
+  # Entity
+  class Entity < String
+    # Creates new entity which is frozen string
     def self.create
-      SecureRandom.uuid
+      new(SecureRandom.uuid).freeze
     end
   end
 end
