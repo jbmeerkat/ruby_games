@@ -45,7 +45,7 @@ RSpec.describe ECS::EntityRegistry do
     end
   end
 
-  describe '#entities_with_components' do
+  describe '#with_components' do
     def create_component(name)
       double('ECS::Components::Base', name: name)
     end
@@ -58,7 +58,7 @@ RSpec.describe ECS::EntityRegistry do
     let(:expected_entities) { [entity1, entity2] }
 
     subject(:entities) do
-      registry.entities_with_components(foo_component.name, bar_component.name)
+      registry.with_components(foo_component.name, bar_component.name)
     end
 
     before do

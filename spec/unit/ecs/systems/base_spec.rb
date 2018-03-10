@@ -3,7 +3,58 @@
 require 'ecs_helper'
 
 RSpec.describe ECS::Systems::Base do
-  subject { described_class.new(entities_registry: nil) }
+  class Foo < ECS::Components::Base
+  end
+
+  class Bar < ECS::Components::Base
+  end
+
+  subject { system }
+
+  let(:system) { Class.new(described_class).new }
 
   it { is_expected.to respond_to :run }
+
+  describe '#entities_with' do
+    subject(:result) do
+      ->(bl) { system.entities_with(:foo, :bar, &bl) }
+    end
+
+    let(:entity_registry) { ECS::EntityRegistry.new }
+    let(:entity) { entity_registry.create_entity }
+    let(:foo_component) { Foo.new }
+    let(:bar_component) { Bar.new }
+
+    before do
+      world = instance_double('ECS::World', entity_registry: entity_registry)
+      system.world = world
+
+      entity_registry.add_component(entity, foo_component)
+      entity_registry.add_component(entity, bar_component)
+    end
+
+    it 'yields entity with components' do
+      expect(result).to yield_with_args entity, foo_component, bar_component
+    end
+  end
+
+  describe '#component' do
+    subject(:result) { system.component(entity, component_name) }
+
+    let(:entity_registry) { ECS::EntityRegistry.new }
+    let(:entity) { entity_registry.create_entity }
+    let(:component) { Foo.new }
+    let(:component_name) { :foo }
+
+    before do
+      world = instance_double('ECS::World', entity_registry: entity_registry)
+      system.world = world
+
+      entity_registry.add_component(entity, component)
+    end
+
+    it 'returns proper component' do
+      expect(result).to eq component
+    end
+  end
 end
