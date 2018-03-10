@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'ecs/ext/dry/struct/mutable'
+require_relative 'ecs/world'
 require_relative 'ecs/entity'
 require_relative 'ecs/entity_registry'
 require_relative 'ecs/components'
