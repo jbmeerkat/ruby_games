@@ -6,6 +6,11 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*_spec.rb'
 
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    - 'id'
+    - '_'
+
 Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
