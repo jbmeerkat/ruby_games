@@ -10,6 +10,8 @@ SimpleCov.start do
   # run windows' test on CI
   add_filter 'lib/pong/menu_window.rb'
   add_filter 'lib/pong/game_window.rb'
+
+  add_group 'Pong', 'lib/pong'
 end
 
 require 'pong'
