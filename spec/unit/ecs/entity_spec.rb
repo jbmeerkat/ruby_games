@@ -6,8 +6,11 @@ RSpec.describe ECS::Entity do
   describe '#new_entity' do
     subject(:result) { described_class.create }
 
-    it 'creates immutable entity' do
+    it 'creates entity' do
       expect(result).to be
+    end
+
+    it 'creates immutable entity' do
       expect { result.capitalize! }.to raise_error FrozenError
     end
 

@@ -14,7 +14,7 @@ RSpec.describe Dry::Struct::Mutable do
 
   describe 'setting value to attribute' do
     it 'changes attribute' do
-      expect { struct.foo = 'baz' }.to change { struct.foo }
+      expect { struct.foo = 'baz' }.to change(struct, :foo)
         .from('bar').to('baz')
     end
   end

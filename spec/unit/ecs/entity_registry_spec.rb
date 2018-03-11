@@ -23,17 +23,17 @@ RSpec.describe ECS::EntityRegistry do
     end
   end
 
+  # rubocop:disable all
   describe '#add_component' do
-    let(:entity) { rand(100) }
-    let(:component) { double('ECS::Components::Base', name: :foo) }
-
-    subject(:add_component) { registry.add_component(entity, component) }
     subject(:entity_components) { registry.entity_components }
     subject(:component_entities) { registry.component_entities }
 
+    let(:entity) { rand(100) }
+    let(:component) { instance_double('ECS::Components::Base', name: :foo) }
+
     it 'adds component' do
       expect {
-        add_component
+        registry.add_component(entity, component)
       }.to change {
         entity_components[entity].count
       }.by(1).and change {
@@ -44,10 +44,15 @@ RSpec.describe ECS::EntityRegistry do
       expect(component_entities[:foo]).to include entity
     end
   end
+  # rubocop:enable
 
   describe '#with_components' do
     def create_component(name)
-      double('ECS::Components::Base', name: name)
+      instance_double('ECS::Components::Base', name: name)
+    end
+
+    subject(:entities) do
+      registry.with_components(foo_component.name, bar_component.name)
     end
 
     let(:entity1) { 1 }
@@ -56,10 +61,6 @@ RSpec.describe ECS::EntityRegistry do
     let(:bar_component) { create_component(:bar) }
     let(:baz_component) { create_component(:baz) }
     let(:expected_entities) { [entity1, entity2] }
-
-    subject(:entities) do
-      registry.with_components(foo_component.name, bar_component.name)
-    end
 
     before do
       registry.add_component(entity1, foo_component)
@@ -78,13 +79,13 @@ RSpec.describe ECS::EntityRegistry do
   end
 
   describe '#entity_component' do
-    let(:entity) { 1 }
-    let(:component) { double('ECS::Components::Base', name: :foo) }
-    let(:expected_component) { component }
-
     subject(:entity_component) do
       registry.entity_component(entity, component.name)
     end
+
+    let(:entity) { 1 }
+    let(:component) { instance_double('ECS::Components::Base', name: :foo) }
+    let(:expected_component) { component }
 
     before { registry.add_component(entity, component) }
 

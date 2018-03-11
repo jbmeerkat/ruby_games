@@ -3,7 +3,6 @@
 require 'ecs_helper'
 
 RSpec.describe ECS::Systems::Movement do
-  subject(:tick) { system.run(time_delta: 1000) }
   subject(:position) { registry.entity_component(entity, :position) }
 
   let(:world) { ECS::World.new }
@@ -16,6 +15,7 @@ RSpec.describe ECS::Systems::Movement do
     ECS::Components::Velocity[x: 10, y: 10]
   end
   let(:system) { described_class.new }
+  let(:tick) { system.run(time_delta: 1000) }
 
   before do
     system.world = world
@@ -25,10 +25,10 @@ RSpec.describe ECS::Systems::Movement do
   end
 
   it 'moves entity' do
-    expect { tick }.to change {
-      position.x
-    }.from(0).to(10).and change {
-      position.y
-    }.from(0).to(10)
+    expect { tick }.to change(
+      position, :x
+    ).from(0).to(10).and change(
+      position, :y
+    ).from(0).to(10)
   end
 end

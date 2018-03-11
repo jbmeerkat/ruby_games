@@ -16,7 +16,7 @@ RSpec.describe Pong::Game do
       window_caption: 'Foo',
       logger: test_logger
     }
-    double('Pong::Config', messages)
+    instance_double('Pong::Config', messages)
   end
 
   before do
@@ -25,12 +25,13 @@ RSpec.describe Pong::Game do
   end
 
   describe 'play game' do
+    # rubocop:disable RSpec/SubjectStub
     before do
-      allow(game).to receive(:show_menu) { nil }
+      allow(game).to receive(:show_menu).and_return(nil)
     end
+    # rubocop:enable RSpec/SubjectStub
 
     it do
-      expect(game).to have_state :inactive
       expect(game).to transition_from(:inactive).to(:menu).on_event(:start)
     end
   end
