@@ -9,11 +9,12 @@ module ECS
   # @see ECS::Systems::Movement#process_tick Movement system implementation
   # @example
   #   class Movement < ECS::Systems::Base
-  #     def process_tick(time_delta:)
-  #       entities_with(:velocity, :position) do |_, (velocity, position)|
-  #         position.x = velocity.x * time_delta
-  #         position.y = velocity.y * time_delta
-  #       end
+  #     watch_components :velocity, :position
+  #     run_on :update
+  #
+  #     def process_entity(entity, velocity, position)
+  #       position.x += velocity.x * time_delta
+  #       position.y += velocity.y * time_delta
   #     end
   #   end
   class System
