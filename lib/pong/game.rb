@@ -80,16 +80,9 @@ module Pong
     def start_playing
       menu_window.close
 
-      setup_world
+      SetupWorld.new(world: world).call
 
       game_window.show
-    end
-
-    def setup_world
-      left_platform = world.create_entity('left_platform')
-      world.entity_registry
-        .add_component(left_platform, Components::Rectangle[])
-      world.add_system(Pong::Systems::RenderRectangle.new)
     end
 
     def time_delta

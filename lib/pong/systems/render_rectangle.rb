@@ -4,16 +4,17 @@ module Pong
   module Systems
     # Rendering rectangles
     class RenderRectangle < ECS::System
-      def process_tick(_)
-        entities_with(:rectangle) do |_, rectangle|
-          Gosu.draw_rect(
-            rectangle.x,
-            rectangle.y,
-            rectangle.width,
-            rectangle.height,
-            Gosu::Color::WHITE
-          )
-        end
+      watch_components :rectangle
+      run_on :draw
+
+      def process_entity(_entity, rectangle)
+        Gosu.draw_rect(
+          rectangle.x,
+          rectangle.y,
+          rectangle.width,
+          rectangle.height,
+          Gosu::Color::WHITE
+        )
       end
     end
   end
