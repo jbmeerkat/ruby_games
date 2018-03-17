@@ -49,7 +49,7 @@ module ECS
     #
     # @param [ECS::Entity] entity
     # @param [Array<ECS::Component>] components
-    def process_entity(entity, *components)
+    def process_entity(_entity, *_components)
       raise 'Must be implemented in subclasses'
     end
 
