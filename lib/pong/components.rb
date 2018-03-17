@@ -6,4 +6,6 @@ module Pong
   end
 end
 
+require_relative 'components/position'
+require_relative 'components/velocity'
 require_relative 'components/rectangle'

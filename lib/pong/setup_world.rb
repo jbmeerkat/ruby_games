@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/AbcSize, Metrics/MethodLength
 
 module Pong
   # Setup script
@@ -20,6 +20,7 @@ module Pong
 
       create_ball
 
+      world.add_system(Pong::Systems::Movement.new)
       world.add_system(Pong::Systems::RenderRectangle.new)
     end
 
@@ -31,9 +32,13 @@ module Pong
 
     def create_platform(side)
       platform = world.create_entity(:"#{side}_platform")
-      add_component(platform, Components::Rectangle[
+      position = Components::Position[
         x: platform_x(side),
         y: platform_y,
+      ]
+      add_component(platform, position)
+      add_component(platform, Components::Rectangle[
+        position: position,
         width: platform_width,
         height: platform_height
       ])
@@ -41,9 +46,21 @@ module Pong
 
     def create_ball
       ball = world.create_entity(:ball)
-      add_component(ball, Components::Rectangle[
+
+      position = Components::Position[
         x: world.width / 2,
         y: world.height / 2,
+      ]
+      add_component(ball, position)
+
+      velocity = Components::Velocity[
+        x: 200,
+        y: 200
+      ]
+      add_component(ball, velocity)
+
+      add_component(ball, Components::Rectangle[
+        position: position,
         width: world.width / 100 * 1,
         height: world.width / 100 * 1
       ])
@@ -75,4 +92,4 @@ module Pong
     end
   end
 end
-# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/AbcSize, Metrics/MethodLength

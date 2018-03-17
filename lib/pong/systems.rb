@@ -6,4 +6,5 @@ module Pong
   end
 end
 
+require_relative 'systems/movement'
 require_relative 'systems/render_rectangle'
