@@ -15,17 +15,18 @@ RSpec.describe ECS::World do
     end[value: 5]
   end
   let(:feed_system) do
-    Class.new(ECS::Systems::Base) do
-      def process_tick(_)
-        entities_with(:hunger) do |_, hunger|
-          hunger.value -= 1
-        end
+    Class.new(ECS::System) do
+      watch_components :hunger
+      run_on :update
+
+      def process_entity(_, hunger)
+        hunger.value -= 1
       end
     end.new
   end
 
   before do
-    world = described_class.new
+    world = described_class.new(width: rand(10), height: rand(10))
     world.add_system(feed_system)
 
     cat = world.create_entity('cat')

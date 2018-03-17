@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'systems/base'
 require_relative 'systems/movement'
 
 module ECS

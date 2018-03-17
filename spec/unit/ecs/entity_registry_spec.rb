@@ -52,29 +52,42 @@ RSpec.describe ECS::EntityRegistry do
     end
 
     subject(:entities) do
-      registry.with_components(foo_component.name, bar_component.name)
+      registry.with_components(*component_names)
     end
 
-    let(:entity1) { 1 }
-    let(:entity2) { 2 }
-    let(:foo_component) { create_component(:foo) }
-    let(:bar_component) { create_component(:bar) }
-    let(:baz_component) { create_component(:baz) }
-    let(:expected_entities) { [entity1, entity2] }
+    context 'with entities and components' do
+      let(:entity1) { 1 }
+      let(:entity2) { 2 }
+      let(:foo_component) { create_component(:foo) }
+      let(:bar_component) { create_component(:bar) }
+      let(:baz_component) { create_component(:baz) }
+      let(:expected_entities) { [entity1, entity2] }
+      let(:component_names) do
+        [foo_component.name, bar_component.name]
+      end
 
-    before do
-      registry.add_component(entity1, foo_component)
-      registry.add_component(entity1, bar_component)
-      registry.add_component(entity2, foo_component)
-      registry.add_component(entity2, bar_component)
+      before do
+        registry.add_component(entity1, foo_component)
+        registry.add_component(entity1, bar_component)
+        registry.add_component(entity2, foo_component)
+        registry.add_component(entity2, bar_component)
 
-      # control group
-      registry.add_component(111, foo_component)
-      registry.add_component(1, baz_component)
+        # control group
+        registry.add_component(111, foo_component)
+        registry.add_component(1, baz_component)
+      end
+
+      it 'returns proper entities' do
+        expect(entities).to contain_exactly(*expected_entities)
+      end
     end
 
-    it 'returns proper entities' do
-      expect(entities).to contain_exactly(*expected_entities)
+    context 'when no entities and components' do
+      let(:component_names) { nil }
+
+      it 'returns empty collection' do
+        expect(entities).to eq []
+      end
     end
   end
 

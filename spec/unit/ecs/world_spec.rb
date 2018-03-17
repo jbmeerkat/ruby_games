@@ -3,25 +3,17 @@
 require 'ecs_helper'
 
 RSpec.describe ECS::World do
-  subject(:test_system) do
-    Class.new(ECS::Systems::Base) do
-      attr_accessor :elapsed, :times_called
-
-      def initialize
-        @elapsed = 0
-        @times_called = 0
-      end
-
-      def process_tick(time_delta:)
-        self.elapsed += time_delta
-        self.times_called += 1
-      end
+  let(:test_system) do
+    Class.new(ECS::System) do
+      run_on :update
     end.new
   end
 
-  let(:world) { described_class.new }
+  let(:world) { described_class.new(width: rand(10), height: rand(10)) }
 
   before do
+    allow(test_system).to receive(:run)
+
     world.add_system(test_system)
 
     world.update(time_delta: 5)
@@ -29,6 +21,6 @@ RSpec.describe ECS::World do
   end
 
   it '#update' do
-    expect(test_system).to have_attributes elapsed: 10, times_called: 2
+    expect(test_system).to have_received(:run).twice
   end
 end

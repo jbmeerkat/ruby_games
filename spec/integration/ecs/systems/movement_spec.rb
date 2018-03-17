@@ -5,7 +5,7 @@ require 'ecs_helper'
 RSpec.describe ECS::Systems::Movement do
   subject(:position) { registry.entity_component(entity, :position) }
 
-  let(:world) { ECS::World.new }
+  let(:world) { ECS::World.new(width: 100, height: 100) }
   let(:registry) { world.entity_registry }
   let(:entity) { world.create_entity }
   let(:position_component) do
@@ -15,9 +15,10 @@ RSpec.describe ECS::Systems::Movement do
     ECS::Components::Velocity[x: 10, y: 10]
   end
   let(:system) { described_class.new }
-  let(:tick) { system.run(time_delta: 1000) }
+  let(:tick) { system.run }
 
   before do
+    world.time_delta = 1000
     system.world = world
 
     registry.add_component(entity, position_component)

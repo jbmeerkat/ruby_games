@@ -4,6 +4,10 @@ require_relative 'pong/version'
 require_relative 'pong/config'
 require_relative 'pong/game'
 
+require_relative 'ecs'
+require_relative 'pong/components'
+require_relative 'pong/systems'
+
 # Pong game's root module
 module Pong
   DEFAULT_CONFIG = {

@@ -30,22 +30,29 @@ module Pong
       end
     end
 
-    attr_reader :config, :logger, :menu_window, :game_window
+    attr_reader :config, :logger, :world, :menu_window, :game_window
 
     def initialize(config:)
       @config = config
       @logger = config.logger
+
+      @world = ECS::World.new(
+        width: config.window_width,
+        height: config.window_height,
+        logger: logger
+      )
+      @previous_delta = 0
 
       @menu_window = MenuWindow.new(game: self)
       @game_window = GameWindow.new(game: self)
     end
 
     def update
-      # do nothing
+      world.update(time_delta: time_delta)
     end
 
     def draw
-      # do nothing
+      world.draw
     end
 
     def button_pressed(id)
@@ -53,6 +60,8 @@ module Pong
     end
 
     private
+
+    attr_accessor :previous_delta
 
     def log_state_change
       from = aasm.from_state
@@ -70,7 +79,24 @@ module Pong
 
     def start_playing
       menu_window.close
+
+      setup_world
+
       game_window.show
+    end
+
+    def setup_world
+      left_platform = world.create_entity('left_platform')
+      world.entity_registry
+        .add_component(left_platform, Components::Rectangle[])
+      world.add_system(Pong::Systems::RenderRectangle.new)
+    end
+
+    def time_delta
+      current_delta = Gosu.milliseconds - previous_delta
+      self.previous_delta = previous_delta + current_delta
+
+      current_delta
     end
   end
 end

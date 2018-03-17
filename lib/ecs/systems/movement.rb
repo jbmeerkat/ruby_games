@@ -3,14 +3,15 @@
 module ECS
   module Systems
     # Basic movement system
-    class Movement < ECS::Systems::Base
-      def process_tick(time_delta:)
-        delta_sec = time_delta / 1000.0
+    class Movement < ECS::System
+      watch_components :velocity, :position
+      run_on :update
 
-        entities_with(:velocity, :position) do |_entity, velocity, position|
-          position.x = velocity.x * delta_sec
-          position.y = velocity.y * delta_sec
-        end
+      def process_entity(_entity, velocity, position)
+        delta_sec = world.time_delta / 1000.0
+
+        position.x = velocity.x * delta_sec
+        position.y = velocity.y * delta_sec
       end
     end
   end

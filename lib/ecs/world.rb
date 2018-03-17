@@ -6,11 +6,20 @@ module ECS
     extend Forwardable
     def_delegators :@entity_registry, :create_entity
 
-    attr_reader :entity_registry, :systems
+    attr_reader :width, :height, :logger, :entity_registry
+    attr_reader :update_systems, :draw_systems
+    attr_accessor :time_delta
 
-    def initialize(entity_registry: EntityRegistry.new)
-      @entity_registry = entity_registry
-      @systems = []
+    def initialize(width:, height:, logger: nil, entity_registry: nil)
+      @width = width
+      @height = height
+      @logger = logger || Logger.new(STDOUT)
+      @entity_registry = entity_registry || EntityRegistry.new
+      @update_systems = Set.new
+      @draw_systems = Set.new
+
+      @logger.info %(Initializing world with width=#{width} height=#{height}
+        entity_registry=#{entity_registry}")
     end
 
     # Adds system to systems list
@@ -18,19 +27,38 @@ module ECS
     #
     # @param [ECS::Systems::Base] system System to add
     def add_system(system)
-      raise 'System already added' if systems.include?(system)
+      logger.debug { "Adding system #{system}" }
 
-      systems << system
-
+      step = system.class.game_step
+      registry_for(step) << system
       system.world = self
+
+      logger.debug { "System #{system} was added to game step #{step}" }
     end
 
     # Triggers each system in order to process game tick
     #
     # @param [Integer] time_delta Milliseconds elapsed
     def update(time_delta:)
-      systems.each do |system|
-        system.run(time_delta: time_delta)
+      self.time_delta = time_delta
+
+      update_systems.each(&:run)
+    end
+
+    def draw
+      draw_systems.each(&:run)
+    end
+
+    private
+
+    def registry_for(step)
+      case step
+      when :draw
+        draw_systems
+      when :update
+        update_systems
+      else
+        raise ArgumentError, "Unknown game step #{system.class.game_step}"
       end
     end
   end

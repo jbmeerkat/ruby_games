@@ -2,7 +2,7 @@
 
 require 'ecs_helper'
 
-RSpec.describe ECS::Systems::Base do
+RSpec.describe ECS::System do
   class Foo < ECS::Components::Base
   end
 
