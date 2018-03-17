@@ -3,10 +3,10 @@
 require 'ecs_helper'
 
 RSpec.describe ECS::System do
-  class Foo < ECS::Components::Base
+  class Foo < ECS::Component
   end
 
-  class Bar < ECS::Components::Base
+  class Bar < ECS::Component
   end
 
   subject { system }

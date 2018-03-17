@@ -2,19 +2,38 @@
 
 require 'ecs_helper'
 
-RSpec.describe ECS::Systems::Movement do
+RSpec.describe ECS::System do
+  class MovementSystem < described_class
+    watch_components :velocity, :position
+    run_on :update
+
+    def process_entity(_entity, velocity, position)
+      delta_sec = world.time_delta / 1000.0
+
+      position.x = velocity.x * delta_sec
+      position.y = velocity.y * delta_sec
+    end
+  end
+
+  class Position < ECS::Component
+    attribute :x, Types::Int.default(0)
+    attribute :y, Types::Int.default(0)
+  end
+
+  class Velocity < ECS::Component
+    attribute :x, Types::Int.default(0)
+    attribute :y, Types::Int.default(0)
+    attribute :max, Types::Int.optional.default(nil)
+  end
+
   subject(:position) { registry.entity_component(entity, :position) }
 
   let(:world) { ECS::World.new(width: 100, height: 100) }
   let(:registry) { world.entity_registry }
   let(:entity) { world.create_entity }
-  let(:position_component) do
-    ECS::Components::Position[x: 0, y: 0]
-  end
-  let(:velocity_component) do
-    ECS::Components::Velocity[x: 10, y: 10]
-  end
-  let(:system) { described_class.new }
+  let(:position_component) { Position[x: 0, y: 0] }
+  let(:velocity_component) { Velocity[x: 10, y: 10] }
+  let(:system) { MovementSystem.new }
   let(:tick) { system.run }
 
   before do
