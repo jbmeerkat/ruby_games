@@ -16,6 +16,15 @@ Naming/UncommunicativeMethodParamName:
 Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
+Layout/CaseIndentation:
+  EnforcedStyle: end
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
 Style/BlockDelimiters:
   Exclude:
     - 'spec/**/*_spec.rb'
