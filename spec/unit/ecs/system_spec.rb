@@ -57,4 +57,18 @@ RSpec.describe ECS::System do
       expect(result).to eq component
     end
   end
+
+  describe '#time_delta' do
+    subject(:time_delta) { system.time_delta }
+
+    let(:entity_registry) { ECS::EntityRegistry.new }
+
+    before do
+      system.world = instance_double('ECS::World', time_delta: 100)
+    end
+
+    it 'returns time delta' do
+      expect(time_delta).to eq 100
+    end
+  end
 end
