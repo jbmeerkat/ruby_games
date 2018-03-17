@@ -44,8 +44,19 @@ module ECS
       end
     end
 
-    def process_entity(_entity)
+    # Redefine this method in your system
+    #
+    # @param [ECS::Entity] entity
+    # @param [Array<ECS::Component>] components
+    def process_entity(entity, *components)
       raise 'Must be implemented in subclasses'
+    end
+
+    # Time delta
+    #
+    # @return [Integer] milliseconds elapsed from previous tick
+    def time_delta
+      world.time_delta
     end
 
     # Returns all entities by specified component names
