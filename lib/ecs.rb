@@ -6,7 +6,6 @@ require_relative 'ecs/entity'
 require_relative 'ecs/entity_registry'
 require_relative 'ecs/component'
 require_relative 'ecs/system'
-require_relative 'ecs/systems'
 
 # Entity-component-system framework
 # https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system
