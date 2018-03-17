@@ -8,6 +8,7 @@ gem 'dry-struct'
 gem 'gosu'
 
 group :development do
+  gem 'reek'
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'yard'
