@@ -20,8 +20,12 @@ RSpec.describe Pong::Game do
   end
 
   before do
-    allow(Pong::MenuWindow).to receive(:new) { double }
-    allow(Pong::GameWindow).to receive(:new) { double }
+    allow(Pong::MenuWindow).to receive(:new) do
+      instance_double('Pong::MenuWindow', show: nil, close: nil)
+    end
+    allow(Pong::GameWindow).to receive(:new) do
+      instance_double('Pong::GameWindow', show: nil)
+    end
   end
 
   describe 'play game' do

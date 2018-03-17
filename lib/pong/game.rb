@@ -41,14 +41,14 @@ module Pong
         height: config.window_height,
         logger: logger
       )
-      @previous_delta = 0
+      @stopwatch = Stopwatch.new(clock: Gosu)
 
       @menu_window = MenuWindow.new(game: self)
       @game_window = GameWindow.new(game: self)
     end
 
     def update
-      world.update(time_delta: time_delta)
+      world.update(time_delta: stopwatch.lap)
     end
 
     def draw
@@ -61,7 +61,7 @@ module Pong
 
     private
 
-    attr_accessor :previous_delta
+    attr_reader :stopwatch
 
     def log_state_change
       from = aasm.from_state
@@ -82,14 +82,8 @@ module Pong
 
       SetupWorld.new(world: world).call
 
+      stopwatch.start
       game_window.show
-    end
-
-    def time_delta
-      current_delta = Gosu.milliseconds - previous_delta
-      self.previous_delta = previous_delta + current_delta
-
-      current_delta
     end
   end
 end

@@ -2,6 +2,7 @@
 
 require_relative 'pong/version'
 require_relative 'pong/config'
+require_relative 'pong/stopwatch'
 require_relative 'pong/setup_world'
 require_relative 'pong/game'
 
