@@ -18,5 +18,9 @@ doc_test:
 lint:
 	bin/rubocop -PES
 
+# optional. include (or not) later in linting step
+reek: lint
+	bin/reek
+
 build: lint test
 build_ci: lint test_ci
