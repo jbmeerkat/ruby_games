@@ -8,12 +8,14 @@ module Pong
       run_on :update
 
       def process_entity(_entity, _right_platform, velocity)
-        if Gosu.button_down?(Gosu::KB_DOWN)
-          velocity.y = world.height * 0.5
+        height = world.height
+
+        velocity.y = if Gosu.button_down?(Gosu::KB_DOWN)
+          height * 0.5
         elsif Gosu.button_down?(Gosu::KB_UP)
-          velocity.y = -world.height * 0.5
+          -height * 0.5
         else
-          velocity.y = 0
+          0
         end
       end
     end

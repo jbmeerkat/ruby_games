@@ -16,7 +16,10 @@ module Pong
       end
 
       def right_bottom
-        Point[x: rectangle.x + rectangle.width, y: rectangle.y + rectangle.height]
+        Point[
+          x: rectangle.x + rectangle.width,
+          y: rectangle.y + rectangle.height
+        ]
       end
 
       def left_bottom

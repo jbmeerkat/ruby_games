@@ -2,12 +2,12 @@
 
 require 'pong_helper'
 
-RSpec.describe Pong::Systems::RightPlatformControl do
+RSpec.describe Pong::Systems::LeftPlatformControl do
   describe '#process_entity' do
     subject(:system) { described_class.new }
 
     let(:velocity) { Pong::Components::Velocity.new(x: 0, y: -10) }
-    let(:right_platform) { double }
+    let(:platform) { double }
     let(:entity) { double }
 
     before do
@@ -16,13 +16,13 @@ RSpec.describe Pong::Systems::RightPlatformControl do
 
     context 'when arrow down key is down' do
       before do
-        allow(Gosu).to receive(:button_down?).with(Gosu::KB_DOWN)
+        allow(Gosu).to receive(:button_down?).with(Gosu::KB_S)
           .and_return(true)
       end
 
       it 'changes velocity on input' do
         expect {
-          system.process_entity(entity, right_platform, velocity)
+          system.process_entity(entity, platform, velocity)
         }.to change(velocity, :y).from(-10).to(10)
       end
     end

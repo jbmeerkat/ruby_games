@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 ruby '~> 2.5.0'
 
 gem 'aasm'
-gem 'dry-struct'
 gem 'activesupport', require: false
+gem 'dry-struct'
 gem 'gosu'
 
 group :development do

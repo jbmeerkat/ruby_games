@@ -4,6 +4,7 @@ require 'pong_helper'
 
 RSpec.describe Pong::Components::BoundingBox do
   subject(:box) { described_class[rectangle: rectangle] }
+
   let(:rectangle) do
     Pong::Components::Rectangle[
       position: Pong::Components::Position[x: 10, y: 20],
