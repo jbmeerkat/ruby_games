@@ -18,6 +18,7 @@ module ECS
   #     end
   #   end
   class System
+    include Logging
     extend Forwardable
     def_delegators :world, :entity_registry
 
