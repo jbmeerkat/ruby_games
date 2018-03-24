@@ -3,15 +3,16 @@
 module ECS
   # Registry of all entities
   class EntityRegistry
-    attr_reader :entities, :entities_by_tag, :entity_components,
-      :component_entities, :logger
+    include Logging
 
-    def initialize(logger: Logger.new(STDOUT))
+    attr_reader :entities, :entities_by_tag, :entity_components,
+      :component_entities
+
+    def initialize
       @entities = []
       @entities_by_tag = Hash.new { |hash, key| hash[key] = [] }
       @entity_components = Hash.new { |hash, key| hash[key] = [] }
       @component_entities = Hash.new { |hash, key| hash[key] = [] }
-      @logger = logger
     end
 
     def create_entity(tag = nil)

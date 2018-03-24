@@ -36,10 +36,10 @@ module Pong
       @config = config
       @logger = config.logger
 
+      ECS.logger = logger
       @world = ECS::World.new(
         width: config.window_width,
-        height: config.window_height,
-        logger: logger
+        height: config.window_height
       )
       @stopwatch = Stopwatch.new(clock: Gosu)
 

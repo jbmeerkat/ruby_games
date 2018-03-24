@@ -3,24 +3,24 @@
 module ECS
   # Main component of ECS
   class World
+    include Logging
     extend Forwardable
     def_delegators :@entity_registry, :create_entity
 
-    attr_reader :width, :height, :logger, :entity_registry
+    attr_reader :width, :height, :entity_registry
     attr_reader :update_systems, :draw_systems
     attr_accessor :time_delta
 
-    def initialize(width:, height:, logger: nil, entity_registry: nil)
+    def initialize(width:, height:, entity_registry: nil)
       @width = width
       @height = height
-      @logger = logger || Logger.new(STDOUT)
       @entity_registry = entity_registry || EntityRegistry.new
       @update_systems = Set.new
       @draw_systems = Set.new
 
       logger.info do
-        %(Initializing world with width=#{width} height=#{height}
-          entity_registry=#{entity_registry}")
+        %(Initializing world with width=#{@width} height=#{@height}
+          entity_registry=#{@entity_registry}")
       end
     end
 

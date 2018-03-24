@@ -8,3 +8,5 @@ SimpleCov.start do
 end
 
 require 'ecs'
+
+ECS.logger = Logger.new('log/test.log')
