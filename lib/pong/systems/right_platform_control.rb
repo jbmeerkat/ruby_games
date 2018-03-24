@@ -9,9 +9,9 @@ module Pong
 
       def process_entity(_entity, _right_platform, velocity)
         if Gosu.button_down?(Gosu::KB_DOWN)
-          velocity.y += 10
+          velocity.y = world.height * 0.5
         elsif Gosu.button_down?(Gosu::KB_UP)
-          velocity.y -= 10
+          velocity.y = -world.height * 0.5
         else
           velocity.y = 0
         end
