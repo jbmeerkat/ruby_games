@@ -56,7 +56,7 @@ module Pong
     end
 
     def button_pressed(id)
-      logger.debug "#{id} was pressed"
+      logger.debug { "#{id} was pressed" }
     end
 
     private

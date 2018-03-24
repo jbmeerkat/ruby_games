@@ -18,8 +18,10 @@ module ECS
       @update_systems = Set.new
       @draw_systems = Set.new
 
-      @logger.info %(Initializing world with width=#{width} height=#{height}
-        entity_registry=#{entity_registry}")
+      logger.info do
+        %(Initializing world with width=#{width} height=#{height}
+          entity_registry=#{entity_registry}")
+      end
     end
 
     # Adds system to systems list

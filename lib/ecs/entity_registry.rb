@@ -15,24 +15,22 @@ module ECS
     end
 
     def create_entity(tag = nil)
-      logger.debug "Creating entity with tag=#{tag} ..."
+      logger.debug { "Creating entity with tag=#{tag} ..." }
 
       entity = Entity.create
       entities << entity
-      entities_by_tag[tag] << entity
+      entities_by_tag[tag] << entity if tag
 
-      logger.debug "Entity #{entity} was created"
+      logger.debug { "Entity #{entity} was created" }
 
       entity
     end
 
     def add_component(entity, component)
-      logger.debug "Adding component #{component.inspect} to #{entity}..."
-
       entity_components[entity] << component
       component_entities[component.name] << entity
 
-      logger.debug "Component #{component.inspect} was added to #{entity}"
+      logger.debug { "Component #{component.inspect} was added to #{entity}" }
 
       component
     end
