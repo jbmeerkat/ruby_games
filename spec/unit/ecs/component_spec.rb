@@ -3,10 +3,10 @@
 require 'ecs_helper'
 
 RSpec.describe ECS::Component do
-  class Foo < described_class
+  class FooBar < described_class
   end
 
-  subject { Foo.new }
+  subject { FooBar.new }
 
   describe '#new' do
     it { is_expected.to be }
@@ -14,6 +14,6 @@ RSpec.describe ECS::Component do
   end
 
   describe '#name' do
-    it { is_expected.to have_attributes name: :foo }
+    it { is_expected.to have_attributes name: :foo_bar }
   end
 end

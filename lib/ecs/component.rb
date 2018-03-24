@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'securerandom'
+require 'active_support/inflector/methods'
 
 module ECS
   # Basic component
@@ -17,7 +18,8 @@ module ECS
     attribute :id, Types::Id
 
     def name
-      self.class.name.split('::').last.downcase.to_sym
+      name = self.class.name.split('::').last
+      ActiveSupport::Inflector.underscore(name).to_sym
     end
   end
 end
