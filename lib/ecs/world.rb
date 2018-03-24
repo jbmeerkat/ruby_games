@@ -48,6 +48,7 @@ module ECS
     end
 
     def draw
+      log_fps
       draw_systems.each(&:run)
     end
 
@@ -62,6 +63,19 @@ module ECS
       else
         raise ArgumentError, "Unknown game step #{system.class.game_step}"
       end
+    end
+
+    def log_fps
+      @times_called ||= 0
+      @times_called += 1
+      @elapsed_time ||= 0
+      @elapsed_time += time_delta
+
+      return if @elapsed_time < 1000
+
+      logger.debug "FPS #{@times_called.round}"
+      @times_called = 0
+      @elapsed_time = 0
     end
   end
 end
