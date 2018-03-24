@@ -20,8 +20,10 @@ module Pong
 
       create_ball
 
-      world.add_system(Pong::Systems::Movement.new)
+      world.add_system(Pong::Systems::RightPlatformControl.new)
+      world.add_system(Pong::Systems::LeftPlatformControl.new)
       world.add_system(Pong::Systems::RenderRectangle.new)
+      world.add_system(Pong::Systems::Movement.new)
     end
 
     private
@@ -32,11 +34,16 @@ module Pong
 
     def create_platform(side)
       platform = world.create_entity(:"#{side}_platform")
+      component_class = Components.const_get("#{side.capitalize}Platform")
+      component = component_class.new
       position = Components::Position[
         x: platform_x(side),
         y: platform_y,
       ]
+      velocity = Components::Velocity[x: 0, y: 0]
+      add_component(platform, component)
       add_component(platform, position)
+      add_component(platform, velocity)
       add_component(platform, Components::Rectangle[
         position: position,
         width: platform_width,
