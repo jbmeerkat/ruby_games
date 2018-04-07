@@ -28,3 +28,8 @@ Layout/MultilineMethodCallIndentation:
 Style/BlockDelimiters:
   Exclude:
     - 'spec/**/*_spec.rb'
+
+# RSpec
+
+RSpec/Be:
+  Enabled: false
