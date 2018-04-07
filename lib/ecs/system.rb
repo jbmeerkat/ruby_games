@@ -22,6 +22,7 @@ module ECS
     extend Forwardable
     def_delegators :world, :entity_registry
 
+    # :reek:Attribute { enabled: false }
     attr_accessor :world
 
     def self.watch_components(*component_names)
@@ -36,12 +37,20 @@ module ECS
       attr_reader :components, :game_step
     end
 
+    # :reek:BooleanParameter { enabled: false }
+    def initialize(debug: false)
+      @debug = debug
+    end
+
     # Process one game tick
     #
     # @param time_delta [Numeric] time in milliseconds elapsed since last tick
     def run
-      # process_tick(time_delta: world.time_delta)
+      log_run if debugging?
+
       entities_with(*self.class.components) do |entity, *components|
+        log_data(entity, components) if debugging?
+
         process_entity entity, *components
       end
     end
@@ -91,6 +100,35 @@ module ECS
     # @return [ECS::Component, nil]
     def component(entity, component_name)
       entity_registry.entity_component(entity, component_name)
+    end
+
+    # Starts debug mode with detailed logging
+    def start_debug
+      @debug = true
+    end
+
+    # Stops debug
+    def stop_debug
+      @debug = false
+    end
+
+    # Answers if debug is running
+    #
+    # @return [Boolean]
+    def debugging?
+      @debug == true
+    end
+
+    private
+
+    def log_run
+      logger.debug { "Running #{self.class.name} with delta #{time_delta} ms" }
+    end
+
+    def log_data(entity, components)
+      logger.debug do
+        "Processing entity #{entity} with components #{components.inspect}"
+      end
     end
   end
 end
