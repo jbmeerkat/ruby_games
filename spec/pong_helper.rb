@@ -15,5 +15,3 @@ SimpleCov.start do
 end
 
 require 'pong'
-
-FileUtils.mkdir_p(Pong.root.join('log'))
