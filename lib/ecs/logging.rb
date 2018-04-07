@@ -3,6 +3,7 @@
 module ECS
   # Logging helpers
   module Logging
+    # :reek:UtilityFunction { enabled: false }
     def logger
       ECS.logger
     end

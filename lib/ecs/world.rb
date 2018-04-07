@@ -9,6 +9,7 @@ module ECS
 
     attr_reader :width, :height, :entity_registry
     attr_reader :update_systems, :draw_systems
+    # :reek:Attribute { enabled: false }
     attr_accessor :time_delta
 
     def initialize(width:, height:, entity_registry: nil)

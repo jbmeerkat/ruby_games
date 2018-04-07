@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-
+# :reek:TooManyStatements
 module Pong
   # Setup script
   class SetupWorld
@@ -53,10 +53,12 @@ module Pong
 
     def create_ball
       ball = world.create_entity(:ball)
+      width = world.width
+      height = world.height
 
       position = Components::Position[
-        x: world.width / 2,
-        y: world.height / 2,
+        x: width / 2,
+        y: height / 2,
       ]
       add_component(ball, position)
 
@@ -66,10 +68,11 @@ module Pong
       ]
       add_component(ball, velocity)
 
+      ball_side_size = width / 100 * 1
       add_component(ball, Components::Rectangle[
         position: position,
-        width: world.width / 100 * 1,
-        height: world.width / 100 * 1
+        width: ball_side_size,
+        height: ball_side_size
       ])
     end
 

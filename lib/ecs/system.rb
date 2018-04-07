@@ -81,6 +81,7 @@ module ECS
     #
     # @yield [ECS::Entity, Array<ECS::Components::Base>] Yields entity and
     #   array of components in specified order
+    # :reek:NestedIterators
     def entities_with(*component_names)
       return to_enum(:entities_with) unless block_given?
 

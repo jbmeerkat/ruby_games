@@ -8,6 +8,7 @@ module ECS
     attr_reader :entities, :entities_by_tag, :entity_components,
       :component_entities
 
+    # :reek:DuplicateMethodCall
     def initialize
       @entities = []
       @entities_by_tag = Hash.new { |hash, key| hash[key] = [] }
