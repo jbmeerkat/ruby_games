@@ -12,6 +12,8 @@ module Pong
     end
 
     def call
+      create_net
+
       create_player(:left)
       create_player(:right)
 
@@ -23,10 +25,20 @@ module Pong
       world.add_system(Pong::Systems::RightPlatformControl.new)
       world.add_system(Pong::Systems::LeftPlatformControl.new)
       world.add_system(Pong::Systems::RenderRectangle.new)
+      world.add_system(Pong::Systems::RenderNet.new)
       world.add_system(Pong::Systems::Movement.new)
     end
 
     private
+
+    def create_net
+      net_entity = world.create_entity(:net)
+      net_component = Components::Net[sections: (world.height / 20.0).ceil]
+      add_component(net_entity, net_component)
+
+      position = Components::Position[x: world.width / 2, y: 0]
+      add_component(net_entity, position)
+    end
 
     def create_player(side)
       world.create_entity(:"#{side}_player")

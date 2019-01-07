@@ -8,5 +8,6 @@ end
 
 require_relative 'systems/movement'
 require_relative 'systems/render_rectangle'
+require_relative 'systems/render_net'
 require_relative 'systems/left_platform_control'
 require_relative 'systems/right_platform_control'
