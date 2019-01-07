@@ -4,8 +4,8 @@ module Pong
   module Components
     # Position component
     class Position < ECS::Component
-      attribute :x, Types::Int.default(0)
-      attribute :y, Types::Int.default(0)
+      attribute :x, Types::Integer.default(0)
+      attribute :y, Types::Integer.default(0)
     end
   end
 end

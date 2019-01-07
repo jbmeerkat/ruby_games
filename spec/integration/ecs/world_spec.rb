@@ -7,7 +7,7 @@ RSpec.describe ECS::World do
 
   let(:hunger_component) do
     Class.new(ECS::Component) do
-      attribute :value, ECS::Component::Types::Int
+      attribute :value, ECS::Component::Types::Integer
 
       def name
         :hunger

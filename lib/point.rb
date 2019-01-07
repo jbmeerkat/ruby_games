@@ -2,6 +2,6 @@
 
 # Simple point
 class Point < Dry::Struct::Mutable
-  attribute :x, Dry::Types['int']
-  attribute :y, Dry::Types['int']
+  attribute :x, Dry::Types['integer']
+  attribute :y, Dry::Types['integer']
 end

@@ -16,14 +16,14 @@ RSpec.describe ECS::System do
   end
 
   class Position < ECS::Component
-    attribute :x, Types::Int.default(0)
-    attribute :y, Types::Int.default(0)
+    attribute :x, Types::Integer.default(0)
+    attribute :y, Types::Integer.default(0)
   end
 
   class Velocity < ECS::Component
-    attribute :x, Types::Int.default(0)
-    attribute :y, Types::Int.default(0)
-    attribute :max, Types::Int.optional.default(nil)
+    attribute :x, Types::Integer.default(0)
+    attribute :y, Types::Integer.default(0)
+    attribute :max, Types::Integer.optional.default(nil)
   end
 
   subject(:position) { registry.entity_component(entity, :position) }

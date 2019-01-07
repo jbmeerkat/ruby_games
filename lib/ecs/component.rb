@@ -13,8 +13,6 @@ module ECS
       Id = Types::String.default { SecureRandom.uuid }
     end
 
-    constructor_type :strict_with_defaults
-
     attribute :id, Types::Id
 
     def name
