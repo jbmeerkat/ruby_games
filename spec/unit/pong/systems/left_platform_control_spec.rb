@@ -6,7 +6,7 @@ RSpec.describe Pong::Systems::LeftPlatformControl do
   describe '#process_entity' do
     subject(:system) { described_class.new }
 
-    let(:velocity) { Pong::Components::Velocity.new(x: 0, y: -10) }
+    let(:velocity) { Pong::Components::Velocity.new(x: 0, y: 0) }
     let(:platform) { double }
     let(:entity) { double }
 
@@ -23,7 +23,22 @@ RSpec.describe Pong::Systems::LeftPlatformControl do
       it 'changes velocity on input' do
         expect {
           system.process_entity(entity, platform, velocity)
-        }.to change(velocity, :y).from(-10).to(10)
+        }.to change(velocity, :y).from(0).to(10)
+      end
+    end
+
+    context 'when arrow up key is down' do
+      before do
+        allow(Gosu).to receive(:button_down?).with(Gosu::KB_S)
+          .and_return(false)
+        allow(Gosu).to receive(:button_down?).with(Gosu::KB_W)
+          .and_return(true)
+      end
+
+      it 'changes velocity on input' do
+        expect {
+          system.process_entity(entity, platform, velocity)
+        }.to change(velocity, :y).from(0).to(-10)
       end
     end
   end
