@@ -1,4 +1,4 @@
-.PHONY: start test doc_test lint build
+.PHONY: start test doc_test lint build ci
 
 start:
 	bin/start
@@ -24,3 +24,6 @@ reek: lint
 
 build: lint test
 build_ci: lint test_ci
+
+ci:
+	travis show
