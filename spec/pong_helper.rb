@@ -15,3 +15,5 @@ SimpleCov.start do
 end
 
 require 'pong'
+
+ECS.logger = Logger.new('log/test.log')

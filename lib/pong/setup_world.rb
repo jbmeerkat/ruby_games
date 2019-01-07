@@ -27,6 +27,7 @@ module Pong
       world.add_system(Pong::Systems::RenderRectangle.new)
       world.add_system(Pong::Systems::RenderNet.new)
       world.add_system(Pong::Systems::Movement.new)
+      world.add_system(Pong::Systems::Ball.new)
     end
 
     private
