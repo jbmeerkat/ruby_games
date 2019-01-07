@@ -2,6 +2,7 @@
 
 module Pong
   module Components
+    # Contains data needed for net rendering
     class Net < ECS::Component
       attribute :section_length, Types::Integer.default(10)
       attribute :section_width, Types::Integer.default(3)

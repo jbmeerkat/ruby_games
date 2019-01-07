@@ -2,6 +2,7 @@
 
 module Pong
   module Systems
+    # Renders net on the table
     class RenderNet < ECS::System
       watch_components :net, :position
       run_on :draw
