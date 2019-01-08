@@ -34,7 +34,7 @@ module Pong
       text = 'Pong'
       x = (width / 2) - (font.text_width(text) / 2)
 
-      font.draw(text, x, height * 0.3, 1, 1.0, 1.0, Gosu::Color::WHITE)
+      font.draw_text(text, x, height * 0.3, 1, 1.0, 1.0, Gosu::Color::WHITE)
     end
 
     def draw_instructions
@@ -43,7 +43,7 @@ module Pong
 
       blink(seconds: 1) do
         x = (width / 2) - (font.text_width(text) / 2)
-        font.draw(text, x, height * 0.6, 1, 1.0, 1.0, Gosu::Color::WHITE)
+        font.draw_text(text, x, height * 0.6, 1, 1.0, 1.0, Gosu::Color::WHITE)
       end
     end
 
@@ -55,7 +55,7 @@ module Pong
       ].join(' ')
 
       x = (width / 2) - (font.text_width(text) / 2)
-      font.draw(text, x, height - font.height, 1, 1.0, 1.0, Gosu::Color::GRAY)
+      font.draw_text(text, x, height - font.height, 1, 1.0, 1.0, Gosu::Color::GRAY)
     end
 
     def blink(seconds:)
