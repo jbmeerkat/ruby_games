@@ -36,7 +36,7 @@ module Pong
           rectangle_collision?(ball, right_platform)
       end
 
-      def rectangle_collision?(first, second)
+      def rectangle_collision?(first, second) # rubocop:disable Metrics/AbcSize
         first.x < second.x + second.width &&
           first.x + first.width > second.x &&
           first.y < second.y + second.height &&

@@ -55,7 +55,8 @@ module Pong
       ].join(' ')
 
       x = (width / 2) - (font.text_width(text) / 2)
-      font.draw_text(text, x, height - font.height, 1, 1.0, 1.0, Gosu::Color::GRAY)
+      font.draw_text(text, x, height - font.height, 1, 1.0, 1.0,
+        Gosu::Color::GRAY)
     end
 
     def blink(seconds:)
