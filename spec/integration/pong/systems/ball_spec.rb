@@ -16,9 +16,9 @@ RSpec.describe Pong::Systems::Ball do
       Pong::Components::Rectangle[position: ball_position, width: 5, height: 5]
     )
 
-    left_platform = world.create_entity(:left_platform)
+    left_racket = world.create_entity(:left_racket)
     world.entity_registry.add_component(
-      left_platform,
+      left_racket,
       Pong::Components::Rectangle[
         position: Pong::Components::Position[x: 0, y: 0],
         width: 10,
@@ -26,9 +26,9 @@ RSpec.describe Pong::Systems::Ball do
       ]
     )
 
-    right_platform = world.create_entity(:right_platform)
+    right_racket = world.create_entity(:right_racket)
     world.entity_registry.add_component(
-      right_platform,
+      right_racket,
       Pong::Components::Rectangle[
         position: Pong::Components::Position[x: 0, y: 100],
         width: 10,
@@ -60,7 +60,7 @@ RSpec.describe Pong::Systems::Ball do
       end
     end
 
-    context 'when ball collides with platform' do
+    context 'when ball collides with racket' do
       let(:ball_velocity) { Pong::Components::Velocity[x: -10, y: 0] }
       let(:ball_position) { Pong::Components::Position[x: 5, y: 5] }
 

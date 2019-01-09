@@ -3,16 +3,16 @@
 module Pong
   module Systems
     # Basic movement system
-    class LeftPlatformControl < ECS::System
-      watch_components :left_platform, :velocity
+    class RightRacketControl < ECS::System
+      watch_components :right_racket, :velocity
       run_on :update
 
-      def process_entity(_entity, _left_platform, velocity)
+      def process_entity(_entity, _right_racket, velocity)
         height = world.height
 
-        velocity.y = if Gosu.button_down?(Gosu::KB_S)
+        velocity.y = if Gosu.button_down?(Gosu::KB_DOWN)
           height * 0.5
-        elsif Gosu.button_down?(Gosu::KB_W)
+        elsif Gosu.button_down?(Gosu::KB_UP)
           -height * 0.5
         else
           0

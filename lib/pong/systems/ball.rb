@@ -14,7 +14,7 @@ module Pong
 
         if collides_with_horizontal_bounds?
           velocity.y = -velocity.y
-        elsif collides_with_platform?
+        elsif collides_with_racket?
           velocity.x = -velocity.x
         end
       end
@@ -27,13 +27,13 @@ module Pong
         rectangle.y + rectangle.height > world.height || rectangle.y.negative?
       end
 
-      def collides_with_platform?
+      def collides_with_racket?
         ball = rectangle_by_tag(:ball)
-        left_platform = rectangle_by_tag(:left_platform)
-        right_platform = rectangle_by_tag(:right_platform)
+        left_racket = rectangle_by_tag(:left_racket)
+        right_racket = rectangle_by_tag(:right_racket)
 
-        rectangle_collision?(ball, left_platform) ||
-          rectangle_collision?(ball, right_platform)
+        rectangle_collision?(ball, left_racket) ||
+          rectangle_collision?(ball, right_racket)
       end
 
       def rectangle_collision?(first, second) # rubocop:disable Metrics/AbcSize

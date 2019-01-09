@@ -17,13 +17,13 @@ module Pong
       create_player(:left)
       create_player(:right)
 
-      create_platform(:left)
-      create_platform(:right)
+      create_racket(:left)
+      create_racket(:right)
 
       create_ball
 
-      world.add_system(Pong::Systems::RightPlatformControl.new)
-      world.add_system(Pong::Systems::LeftPlatformControl.new)
+      world.add_system(Pong::Systems::RightRacketControl.new)
+      world.add_system(Pong::Systems::LeftRacketControl.new)
       world.add_system(Pong::Systems::RenderRectangle.new)
       world.add_system(Pong::Systems::RenderNet.new)
       world.add_system(Pong::Systems::Movement.new)
@@ -45,22 +45,22 @@ module Pong
       world.create_entity(:"#{side}_player")
     end
 
-    def create_platform(side)
-      platform = world.create_entity(:"#{side}_platform")
-      component_class = Components.const_get("#{side.capitalize}Platform")
+    def create_racket(side)
+      racket = world.create_entity(:"#{side}_racket")
+      component_class = Components.const_get("#{side.capitalize}Racket")
       component = component_class.new
       position = Components::Position[
-        x: platform_x(side),
-        y: platform_y,
+        x: racket_x(side),
+        y: racket_y,
       ]
       velocity = Components::Velocity[x: 0, y: 0]
-      add_component(platform, component)
-      add_component(platform, position)
-      add_component(platform, velocity)
-      add_component(platform, Components::Rectangle[
+      add_component(racket, component)
+      add_component(racket, position)
+      add_component(racket, velocity)
+      add_component(racket, Components::Rectangle[
         position: position,
-        width: platform_width,
-        height: platform_height
+        width: racket_width,
+        height: racket_height
       ])
     end
 
@@ -93,24 +93,24 @@ module Pong
       world.entity_registry.add_component(entity, component)
     end
 
-    def platform_x(side)
+    def racket_x(side)
       case side
       when :left
         0
       when :right
-        world.width - platform_width
+        world.width - racket_width
       end
     end
 
-    def platform_y
-      world.height / 2 - platform_height / 2
+    def racket_y
+      world.height / 2 - racket_height / 2
     end
 
-    def platform_width
+    def racket_width
       world.width / 100 * 1
     end
 
-    def platform_height
+    def racket_height
       world.height / 100 * 10
     end
   end
