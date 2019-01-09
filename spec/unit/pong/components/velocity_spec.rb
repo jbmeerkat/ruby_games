@@ -9,6 +9,6 @@ RSpec.describe Pong::Components::Velocity do
   let(:y) { 10 }
 
   it 'has velocity values' do
-    expect(velocity).to have_attributes x: 10, y: 10, max: nil
+    expect(velocity).to have_attributes x: 10, y: 10, max: 9999
   end
 end

@@ -6,7 +6,7 @@ module Pong
     class Velocity < ECS::Component
       attribute :x, Types::Integer.default(0)
       attribute :y, Types::Integer.default(0)
-      attribute :max, Types::Integer.optional.default(nil)
+      attribute :max, Types::Integer.default(9999)
     end
   end
 end
