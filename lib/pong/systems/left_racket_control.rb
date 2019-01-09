@@ -7,7 +7,7 @@ module Pong
       watch_components :left_racket, :velocity
       run_on :update
 
-      def process_entity(_entity, _left_racket, velocity)
+      def process_entity(_entity, _racket, velocity)
         height = world.height
 
         velocity.y = if Gosu.button_down?(Gosu::KB_S)

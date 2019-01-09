@@ -52,6 +52,7 @@ module Pong
       position = Components::Position[
         x: racket_x(side),
         y: racket_y,
+        on_world_bounds: :stop
       ]
       velocity = Components::Velocity[x: 0, y: 0]
       add_component(racket, component)
@@ -71,7 +72,7 @@ module Pong
 
       position = Components::Position[
         x: width / 2,
-        y: height / 2,
+        y: height / 2
       ]
       add_component(ball, position)
 
