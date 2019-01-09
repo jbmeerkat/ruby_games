@@ -28,6 +28,8 @@ module Pong
       end
 
       def process_collision(velocity, rectangle)
+        position = rectangle.position
+
         if crossing_upper_bound?(rectangle)
           position.y = 0
           velocity.y = 0
