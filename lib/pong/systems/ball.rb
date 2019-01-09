@@ -36,6 +36,7 @@ module Pong
           rectangle_collision?(ball, right_racket)
       end
 
+      # :reek:DuplicateMethodCall
       def rectangle_collision?(first, second) # rubocop:disable Metrics/AbcSize
         first.x < second.x + second.width &&
           first.x + first.width > second.x &&

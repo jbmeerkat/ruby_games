@@ -20,8 +20,7 @@ module ECS
       logger.debug { "Creating entity with tag=#{tag} ..." }
 
       entity = Entity.create
-      entities << entity
-      entities_by_tag[tag] << entity if tag
+      register(entity, tag)
 
       logger.debug { "Entity #{entity} was created" }
 
@@ -47,6 +46,13 @@ module ECS
       entity_components[entity].detect do |component|
         component.name == component_name
       end
+    end
+
+    private
+
+    def register(entity, tag)
+      entities << entity
+      entities_by_tag[tag] << entity if tag
     end
   end
 end

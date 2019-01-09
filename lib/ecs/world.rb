@@ -12,10 +12,10 @@ module ECS
     # :reek:Attribute { enabled: false }
     attr_accessor :time_delta
 
-    def initialize(width:, height:, entity_registry: nil)
+    def initialize(width:, height:, entity_registry: EntityRegistry.new)
       @width = width
       @height = height
-      @entity_registry = entity_registry || EntityRegistry.new
+      @entity_registry = entity_registry
       @update_systems = Set.new
       @draw_systems = Set.new
 
@@ -66,6 +66,8 @@ module ECS
       end
     end
 
+    # NOTE: Quick and dirty solution. Needs improvement.
+    # :reek:TooManyStatements
     def log_fps
       @times_called ||= 0
       @times_called += 1

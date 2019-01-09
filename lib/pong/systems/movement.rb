@@ -24,6 +24,10 @@ module Pong
         return if position.bypass_world_bounds?
         return unless position.stop_on_world_bounds?
 
+        process_collision(velocity, rectangle)
+      end
+
+      def process_collision(velocity, rectangle)
         if crossing_upper_bound?(rectangle)
           position.y = 0
           velocity.y = 0
