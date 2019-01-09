@@ -74,7 +74,7 @@ module ECS
 
       return if @elapsed_time < 1000
 
-      logger.debug "FPS #{@times_called.round}"
+      logger.debug { "FPS #{@times_called.round}" }
       @times_called = 0
       @elapsed_time = 0
     end
