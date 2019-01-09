@@ -41,7 +41,9 @@ RSpec.describe Pong::Systems::Movement do
   describe 'world bounds handling' do
     context 'when stop on upper' do
       let(:velocity) { Pong::Components::Velocity[x: 0, y: -10] }
-      let(:position) { Pong::Components::Position[x: 0, y: 5, on_world_bounds: :stop] }
+      let(:position) do
+        Pong::Components::Position[x: 0, y: 5, on_world_bounds: :stop]
+      end
 
       it 'restricts moving' do
         expect { tick }.to change(
@@ -54,7 +56,9 @@ RSpec.describe Pong::Systems::Movement do
 
     context 'when stop on lower' do
       let(:velocity) { Pong::Components::Velocity[x: 0, y: 10] }
-      let(:position) { Pong::Components::Position[x: 0, y: 91, on_world_bounds: :stop] }
+      let(:position) do
+        Pong::Components::Position[x: 0, y: 91, on_world_bounds: :stop]
+      end
 
       it 'restricts moving' do
         expect { tick }.to change(
