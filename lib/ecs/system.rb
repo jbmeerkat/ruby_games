@@ -48,6 +48,8 @@ module ECS
     def run
       log_run if debugging?
 
+      ensure_world
+
       entities_with(*self.class.components) do |entity, *components|
         log_data(entity, components) if debugging?
 
@@ -121,6 +123,10 @@ module ECS
     end
 
     private
+
+    def ensure_world
+      raise 'World must be set. System cannot work without it.' unless world
+    end
 
     def log_run
       logger.debug { "Running #{self.class.name} with delta #{time_delta} ms" }
