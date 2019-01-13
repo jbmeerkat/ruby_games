@@ -13,9 +13,9 @@ module Pong
         velocity = entity_registry.entity_component(ball, :velocity)
 
         if collides_with_horizontal_bounds?
-          velocity.y = -velocity.y
+          bounce_off_bound(velocity)
         elsif collides_with_racket?
-          velocity.x = -velocity.x
+          bounce_off_racket(velocity)
         end
       end
 
@@ -36,6 +36,16 @@ module Pong
           rectangle_collision?(ball, right_racket)
       end
 
+      def bounce_off_bound(velocity)
+        velocity.y = -velocity.y
+        play_collision_sound
+      end
+
+      def bounce_off_racket(velocity)
+        velocity.x = -velocity.x
+        play_collision_sound
+      end
+
       # :reek:DuplicateMethodCall
       def rectangle_collision?(first, second) # rubocop:disable Metrics/AbcSize
         first.x < second.x + second.width &&
@@ -51,6 +61,14 @@ module Pong
 
       def entity_rectangle(entity)
         entity_registry.entity_component(entity, :rectangle)
+      end
+
+      def play_collision_sound
+        sound.play
+      end
+
+      def sound
+        @sound ||= Gosu::Sample.new('assets/sounds/ball_collision.wav')
       end
     end
   end
