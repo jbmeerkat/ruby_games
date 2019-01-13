@@ -22,12 +22,16 @@ module Pong
 
       create_ball
 
+      setup_scoring
+
       world.add_system(Pong::Systems::RightRacketControl.new)
       world.add_system(Pong::Systems::LeftRacketControl.new)
       world.add_system(Pong::Systems::RenderRectangle.new)
       world.add_system(Pong::Systems::RenderNet.new)
       world.add_system(Pong::Systems::Movement.new)
       world.add_system(Pong::Systems::Ball.new)
+      world.add_system(Pong::Systems::Scoring.new)
+      world.add_system(Pong::Systems::RenderScore.new)
     end
 
     private
@@ -88,6 +92,12 @@ module Pong
         width: ball_side_size,
         height: ball_side_size
       ])
+    end
+
+    def setup_scoring
+      score = world.create_entity(:score)
+
+      add_component(score, Pong::Components::Score.new)
     end
 
     def add_component(entity, component)
