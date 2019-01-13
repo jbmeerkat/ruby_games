@@ -11,6 +11,8 @@ Metrics/BlockLength:
 Naming/UncommunicativeMethodParamName:
   AllowedNames:
     - 'id'
+    - 'x'
+    - 'y'
     - '_'
 
 Layout/AlignParameters:
