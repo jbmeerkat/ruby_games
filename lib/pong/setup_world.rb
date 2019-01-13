@@ -81,8 +81,8 @@ module Pong
       add_component(ball, position)
 
       velocity = Components::Velocity[
-        x: 200,
-        y: 200
+        x: 250,
+        y: 250
       ]
       add_component(ball, velocity)
 
