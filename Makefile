@@ -12,6 +12,9 @@ test:
 test_ci:
 	bin/rspec -t ~gosu
 
+documentation:
+	yard doc lib/ecs
+
 doc_test:
 	bin/rspec -fd
 
