@@ -16,6 +16,14 @@ Clone repo and run
 
 ## Playing
 
+### Controls
+
+Right player: `up` and `down`
+
+Left player: `w` and `s`
+
+### Start the game
+
 `$ make`
 
 ## Testing
