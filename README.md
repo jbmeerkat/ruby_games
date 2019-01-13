@@ -18,6 +18,16 @@ Clone repo and run
 
 `$ make`
 
+## Documentation
+
+There is documentation for ECS framework which can be built with
+
+`$ make documentation`
+
+And browsed with
+
+`$ open doc/index.html`
+
 ## Testing
 
 Run linters and tests:
