@@ -14,8 +14,10 @@ module Pong
 
         if collides_with_horizontal_bounds?
           velocity.y = -velocity.y
+          play_collision_sound
         elsif collides_with_racket?
           velocity.x = -velocity.x
+          play_collision_sound
         end
       end
 
@@ -51,6 +53,14 @@ module Pong
 
       def entity_rectangle(entity)
         entity_registry.entity_component(entity, :rectangle)
+      end
+
+      def play_collision_sound
+        sound.play
+      end
+
+      def sound
+        @sound ||= Gosu::Sample.new('assets/sounds/ball_collision.wav')
       end
     end
   end
