@@ -146,6 +146,12 @@ module Games
   def run_snake
     require_relative 'snake'
 
-    Snake.start
+    Snake.start(
+      Snake::Config[
+        logger: Logger.new('log/snake.log'),
+        window_width: 1024,
+        window_heigth: 768
+      ]
+    )
   end
 end

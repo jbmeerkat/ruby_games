@@ -5,6 +5,7 @@ ruby '~> 2.6.0'
 
 gem 'aasm'
 gem 'activesupport', require: false
+gem 'dry-initializer'
 gem 'dry-struct'
 gem 'gosu'
 

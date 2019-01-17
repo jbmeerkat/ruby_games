@@ -14,7 +14,8 @@
 module Snake
   module_function
 
-  def start
-    raise 'Not implemented yet'
+  def start(config)
+    game = Game.new(config)
+    game.start
   end
 end
