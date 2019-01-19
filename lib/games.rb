@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'window'
+
 # Game selection
 module Games
   FONT_PATH = Pathname.new(File.expand_path('..', __dir__))
@@ -148,9 +150,10 @@ module Games
 
     Snake.start(
       Snake::Config[
+        window: ::Window.new(1024, 768),
         logger: Logger.new('log/snake.log'),
         window_width: 1024,
-        window_heigth: 768
+        window_height: 768
       ]
     )
   end
