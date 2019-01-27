@@ -2,7 +2,6 @@
 
 require_relative 'pong/version'
 require_relative 'pong/config'
-require_relative 'pong/stopwatch'
 require_relative 'pong/setup_world'
 require_relative 'pong/game'
 
@@ -10,6 +9,8 @@ require_relative 'ecs'
 require_relative 'point'
 require_relative 'pong/components'
 require_relative 'pong/systems'
+
+require_relative 'common/stopwatch'
 
 # Pong game's root module
 module Pong
