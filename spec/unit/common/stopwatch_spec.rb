@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
-require 'pong_helper'
+require 'common_helper'
+require 'common/stopwatch'
 
-RSpec.describe Pong::Stopwatch do
+RSpec.describe Stopwatch do
   subject(:stopwatch) { described_class.new(clock: clock) }
 
   let(:clock) { double }
 
   before do
-    allow(clock).to receive(:milliseconds).and_return(1000, 1200)
+    allow(clock).to receive(:milliseconds).and_return(1000, 1200, 1400)
 
     stopwatch.start
   end
@@ -28,6 +29,26 @@ RSpec.describe Pong::Stopwatch do
       expect {
         stopwatch.lap
       }.to change(stopwatch, :last_clock_time).from(1000).to(1200)
+    end
+  end
+
+  describe '#pause' do
+    context 'when pausing started' do
+      it 'stops counting time' do
+        stopwatch.pause
+
+        expect(stopwatch.lap).to eq 0
+      end
+    end
+
+    context 'when starting paused' do
+      before { stopwatch.pause }
+
+      it 'starts counting time' do
+        stopwatch.start
+
+        expect(stopwatch.lap).to eq 200
+      end
     end
   end
 end
