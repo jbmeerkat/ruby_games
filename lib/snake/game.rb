@@ -16,6 +16,7 @@ module Snake
 
     def start
       scene = GameScene.new(game: self)
+      scene.setup
       window.scene = scene
 
       window.show

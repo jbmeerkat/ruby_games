@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require_relative 'ecs'
+
+require_relative 'common/stopwatch'
+
 require_relative 'snake/types'
 require_relative 'snake/config'
 require_relative 'snake/game'
