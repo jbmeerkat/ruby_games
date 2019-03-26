@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'common_helper'
-require 'common/linked_list'
+require 'common/doubly_linked_list'
 
-RSpec.describe LinkedList do
+RSpec.describe DoublyLinkedList do
   subject(:list) { described_class.new }
 
   describe '.from_array' do

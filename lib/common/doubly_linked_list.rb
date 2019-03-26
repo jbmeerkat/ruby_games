@@ -1,17 +1,21 @@
 # frozen_string_literal: true
 
-class LinkedList
+class DoublyLinkedList
   class Node
     attr_reader :data
-    attr_accessor :next
+    attr_accessor :next, :previous
 
-    def initialize(data:, next_node: nil)
+    def initialize(data:)
       @data = data
-      @next_node = next_node
     end
 
     def add(node)
-      self.next ? self.next.add(node) : self.next = node
+      if self.next
+        self.next.add(node)
+      else
+        self.next = node
+        node.previous = self
+      end
     end
 
     def tail?
