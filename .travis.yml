@@ -5,7 +5,7 @@ before_script:
   - ./cc-test-reporter before-build
 before_install:
   - gem update --system
-  - gem install bundler
+  - gem install bundler:2.0.1
   # Gosu dependencies
   - sudo apt-get install build-essential libsdl2-dev libsdl2-ttf-dev libpango1.0-dev libgl1-mesa-dev libopenal-dev libsndfile-dev libmpg123-dev libgmp-dev libegl1-mesa-dev libgles2-mesa-dev
 install:
