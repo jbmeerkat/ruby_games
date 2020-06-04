@@ -50,7 +50,7 @@ GEM
       dry-inflector (~> 0.1, >= 0.1.2)
       dry-logic (~> 0.4, >= 0.4.2)
     equalizer (0.0.11)
-    gosu (0.14.5)
+    gosu (0.15.2)
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
