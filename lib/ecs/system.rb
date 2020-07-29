@@ -3,8 +3,9 @@
 module ECS
   # Basic system implementation
   #
-  # System must implement method +run+ that accepts +time_delta+ keyword
-  # argument
+  # System must implement method +process_entoty+ that accepts +entity+ and
+  # components specified with +watch_components+ method (if any) or redefine
+  # +run+ for special cases.
   #
   # @see ECS::Systems::Movement#process_tick Movement system implementation
   # @example
@@ -124,14 +125,17 @@ module ECS
 
     private
 
+    # @api private
     def ensure_world
       raise 'World must be set. System cannot work without it.' unless world
     end
 
+    # @api private
     def log_run
       logger.debug { "Running #{self.class.name} with delta #{time_delta} ms" }
     end
 
+    # @api private
     def log_data(entity, components)
       logger.debug do
         "Processing entity #{entity} with components #{components.inspect}"

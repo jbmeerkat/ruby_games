@@ -12,10 +12,10 @@ module ECS
     # :reek:Attribute { enabled: false }
     attr_accessor :time_delta
 
-    def initialize(width:, height:, entity_registry: EntityRegistry.new)
+    def initialize(width:, height:)
       @width = width
       @height = height
-      @entity_registry = entity_registry
+      @entity_registry = EntityRegistry.new(world: self)
       @update_systems = Set.new
       @draw_systems = Set.new
 

@@ -3,7 +3,8 @@
 require 'ecs_helper'
 
 RSpec.describe ECS::EntityRegistry do
-  let(:registry) { described_class.new }
+  let(:registry) { world.entity_registry }
+  let(:world) { ECS::World.new(width: 100, height: 100) }
 
   describe '#create_entity' do
     subject(:create_entity) { registry.create_entity }

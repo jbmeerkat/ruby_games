@@ -5,11 +5,12 @@ module ECS
   class EntityRegistry
     include Logging
 
-    attr_reader :entities, :entities_by_tag, :entity_components,
+    attr_reader :world, :entities, :entities_by_tag, :entity_components,
       :component_entities
 
     # :reek:DuplicateMethodCall
-    def initialize
+    def initialize(world:)
+      @world = world
       @entities = []
       @entities_by_tag = Hash.new { |hash, key| hash[key] = [] }
       @entity_components = Hash.new { |hash, key| hash[key] = [] }

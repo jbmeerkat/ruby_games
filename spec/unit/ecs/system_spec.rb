@@ -20,13 +20,13 @@ RSpec.describe ECS::System do
       ->(bl) { system.entities_with(:foo, :bar, &bl) }
     end
 
-    let(:entity_registry) { ECS::EntityRegistry.new }
+    let(:world) { ECS::World.new(width: 100, height: 100) }
+    let(:entity_registry) { world.entity_registry }
     let(:entity) { entity_registry.create_entity }
     let(:foo_component) { Foo.new }
     let(:bar_component) { Bar.new }
 
     before do
-      world = instance_double('ECS::World', entity_registry: entity_registry)
       system.world = world
 
       entity_registry.add_component(entity, foo_component)
@@ -41,13 +41,13 @@ RSpec.describe ECS::System do
   describe '#component' do
     subject(:result) { system.component(entity, component_name) }
 
-    let(:entity_registry) { ECS::EntityRegistry.new }
+    let(:world) { ECS::World.new(width: 100, height: 100) }
+    let(:entity_registry) { world.entity_registry }
     let(:entity) { entity_registry.create_entity }
     let(:component) { Foo.new }
     let(:component_name) { :foo }
 
     before do
-      world = instance_double('ECS::World', entity_registry: entity_registry)
       system.world = world
 
       entity_registry.add_component(entity, component)
